@@ -11,25 +11,33 @@ import java.util.List;
 
 public class CustomerDBUtil {
 	
+	private static Connection con = null;
+	private static Statement stmt = null;
+	private static ResultSet rs = null;
+	
 	public static List<Customer> validate(String userName, String password){
 		
 		ArrayList<Customer> cus = new ArrayList<>();
 		
 		//create database connection
-		String url = "jdbc:mysql://localhost:3306/hotel";
-		String user = "root";
-		String pass = "0000";
+//		String url = "jdbc:mysql://localhost:3306/hotel";
+//		String user = "root";
+//		String pass = "0000";
 		
 //		validation
 		
 		try {
 			
-			Class.forName("com.mysql.jdbc.Driver");
 			
-			Connection con = DriverManager.getConnection(url,user,pass);
+			con = DBconnect.getConnection();
+			stmt = con.createStatement();
+//			Class.forName("com.mysql.jdbc.Driver");
+			
+//			Connection con = DriverManager.getConnection(url,user,pass);
 			Statement stmt = con.createStatement();
 			String sql = "select * from customer where username='"+userName+"' and password='"+password+"'";
-			ResultSet rs = stmt.executeQuery(sql);
+//			ResultSet rs = stmt.executeQuery(sql);
+			rs = stmt.executeQuery(sql);
 			
 			
 			if(rs.next()) {
@@ -60,18 +68,20 @@ public class CustomerDBUtil {
 		boolean isSuccess = false;
 		
 		//create database connection
-		String url = "jdbc:mysql://localhost:3306/hotel";
-		String user = "root";
-		String pass = "0000";
+//		String url = "jdbc:mysql://localhost:3306/hotel";
+//		String user = "root";
+//		String pass = "0000";
 		
 try {
-			
-			Class.forName("com.mysql.jdbc.Driver");
-			
-			Connection con = DriverManager.getConnection(url,user,pass);
+	con = DBconnect.getConnection();
+	stmt = con.createStatement();
+//			Class.forName("com.mysql.jdbc.Driver");
+//			
+//			Connection con = DriverManager.getConnection(url,user,pass);
 			Statement stmt = con.createStatement();
 			String sql = "insert into customer values (0,'"+name+"','"+email+"','"+phone+"','"+username+"','"+password+"')";
 			int rs = stmt.executeUpdate(sql);
+			
 			
 			if(rs > 0) {
 				isSuccess = true;
