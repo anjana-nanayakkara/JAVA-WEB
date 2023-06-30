@@ -9,7 +9,7 @@
 <body>
 	
 	
-	<form action="#" method="post">
+	<form action="insert" method="post">
 		Name <input type="text" name="name"><br>
 		Email <input type="text" name="email"><br>
 		Phone number <input type="text" name="phone"><br>

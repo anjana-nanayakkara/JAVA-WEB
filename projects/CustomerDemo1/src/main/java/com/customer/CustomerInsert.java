@@ -1,6 +1,8 @@
 package com.customer;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +27,11 @@ public class CustomerInsert extends HttpServlet {
 		boolean isTrue =CustomerDBUtil.insertcustomer(name, email, phone, username, password);
 		
 		if(isTrue == true) {
-			
+			RequestDispatcher dis = request.getRequestDispatcher("success.jsp");
+			dis.forward(request, response);
+		}else {
+			RequestDispatcher dis2 = request.getRequestDispatcher("unsuccess.jsp");
+			dis2.forward(request, response);
 		}
 		
 	}
